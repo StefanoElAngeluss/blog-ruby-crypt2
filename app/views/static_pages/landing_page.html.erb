@@ -1,2 +1,113 @@
-<h1>Bienvenue sur notre site</h1>
-<%= link_to "Privacy Policy", privacy_policy_path %>
+<%= render 'navbar/navbar' %>
+<h1 class="mt-4" align="center">Bienvenue sur notre site</h1>
+<div class="container mb-5 mt-5 ml-5">
+	
+	<div class="card" style="width: 24rem;">
+		<div class="card-header p-0 mx-3 mt-3 position-relative z-index-1">
+			<a href="javascript:;" class="d-block">
+				<img src="https://loremflickr.com/320/240" class="img-fluid border-radius-lg" style="width:100%;">
+			</a>
+		</div>
+
+		<div class="card-body pt-2">
+			<span class="text-gradient text-primary text-uppercase text-xs font-weight-bold my-2">House</span>
+			<a href="javascript:;" class="card-title h5 d-block text-darker">
+				Shared Coworking
+			</a>
+			<p class="card-description mb-4">
+				Use border utilities to quickly style the border and border-radius of an element. Great for images, buttons.
+			</p>
+			<div class="author align-items-center">
+				<img src="https://i.pravatar.cc/50?img=3" alt="..." class="avatar shadow" style="border-radius: 50%;">
+					<span class="ml-2">Mathew Glock</span>
+					<div class="d-flex justify-content-between mt-3">
+						<hr style="border:2px solid green;width:40%;float:left;">
+							<i class="fas fa-anchor" style="margin-top:8px!important;"></i>
+						<hr style="border:2px solid green;width:40%;float:right;">
+					</div>
+					<div class="stats mt-2">
+						<small>Posted on 28 February</small>
+					</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Footer -->
+<footer class="bg-light text-center text-lg-start">
+  <!-- Grid container -->
+  <div class="container p-4">
+    <!--Grid row-->
+    <div class="row">
+      <!--Grid column-->
+      <div class="col-lg-4 col-md-12 mb-4 mb-md-0">
+        <h5 class="text-uppercase">Footer Content</h5>
+
+        <p>
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste atque ea quis
+          molestias. Fugiat pariatur maxime quis culpa corporis vitae repudiandae aliquam
+          voluptatem veniam, est atque cumque eum delectus sint!
+        </p>
+      </div>
+      <!--Grid column-->
+
+      <!--Grid column-->
+      <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+        <h5 class="text-uppercase">Links</h5>
+
+        <ul class="list-unstyled mb-0">
+          <li>
+            <a href="#!" class="text-dark">Link 1</a>
+          </li>
+          <li>
+            <a href="#!" class="text-dark">Link 2</a>
+          </li>
+          <li>
+            <a href="#!" class="text-dark">Link 3</a>
+          </li>
+          <li>
+            <a href="#!" class="text-dark">Link 4</a>
+          </li>
+        </ul>
+      </div>
+      <!--Grid column-->
+
+      <!--Grid column-->
+      <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+        <h5 class="text-uppercase mb-0">Links</h5>
+
+        <ul class="list-unstyled">
+          <li class="mt-1 mb-1">
+            <span class="text-dark">
+            	<%= link_to privacy_policy_path, class: "btn btn-lg btn-warning pt-1 pb-1" do %>
+								<i class="fas fa-file-word mr-2"></i>
+								Politique de confidentialité
+							<% end %>
+						</span>
+          </li>
+          <li>
+            <a href="#!" class="text-dark">Link 2</a>
+          </li>
+          <li>
+            <a href="#!" class="text-dark">Link 3</a>
+          </li>
+          <li>
+            <a href="#!" class="text-dark">Link 4</a>
+          </li>
+        </ul>
+      </div>
+      <!--Grid column-->
+    </div>
+    <!--Grid row-->
+  </div>
+  <!-- Grid container -->
+
+  <!-- Copyright -->
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    © 2020 Copyright:
+    <a class="text-dark" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+  </div>
+  <!-- Copyright -->
+</footer>
+<!-- Footer -->
+</div>
