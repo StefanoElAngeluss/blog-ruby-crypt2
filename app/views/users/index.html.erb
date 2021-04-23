@@ -1,0 +1,6 @@
+<h2>Tous les Utilisateurs</h2>
+<span>il y as <%= pluralize @users.size, "Utilisateur" %></span>
+<% @users.each do |user| %>
+	<hr>
+	<%= render 'users/user', user: user %>
+<% end %>
