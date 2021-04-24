@@ -1,10 +1,31 @@
 class UsersController < ApplicationController
+
 	def index
 		@users = User.all.order(created_at: :asc)
 	end
 
 	def show
 		@user = User.find(params[:id])
+	end
+
+	def edit
+    @user = User.find(params[:id])
+  end
+
+  def update
+    @user = User.find(params[:id])
+    @user.update(user_params)
+    if @user.update(user_params)
+      redirect_to @user, notice: "User was successfully updated."
+    else
+      render :edit
+    end
+  end
+
+	def destroy
+		@user = User.find(params[:id])
+		@user.destroy
+		redirect_to users_path, notice: "Votre compte à bien été supprimer."
 	end
 
 	def ban
@@ -17,9 +38,10 @@ class UsersController < ApplicationController
 		redirect_to @user, notice: "Accès utilisateur verrouillé: #{@user.access_locked?}"
 	end
 
-	def destroy
-		@user = User.find(params[:id])
-		@user.destroy
-		redirect_to users_path, notice: "Votre compte à bien été supprimer."
-	end
+	private
+
+  def user_params
+    params.require(:user).permit(*User::ROLES)
+  end
+
 end

@@ -44,9 +44,16 @@
 	<%= image_tag user.image, size: "50x50" %>
 <% end %>
 
+<br>
+<b><%= 'role_utilisateur:'.humanize %></b>
+<% if user.roles.present? %>
+	<%= user.active_roles.join(", ") %>
+<% end %>
+
 <div class="mt-2">
 	<p class="d-flex justify-content-between">
 		<%= link_to "Supprimer mon compte", user, method: :delete, data: { confirm: "Êtes vous sure de vouloir supprimer votre compte ?" }, class: "btn btn-sm btn-danger" %>
+		<%= link_to "Editer le role utilisateur", edit_user_path(user), class: "btn btn-sm btn-info" %>
 		<% if user.access_locked? %>
 			<%= link_to ban_status(user), ban_user_path(user), method: :patch, data: { confirm: "Êtes vous sure de vouloir bannir cet utilisateur ?" }, class: "btn btn-sm btn-secondary" %>
 		<% else %>

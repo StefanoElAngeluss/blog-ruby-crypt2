@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
   	confirmations: 'users/confirmations',
   	omniauth_callbacks: 'users/omniauth_callbacks' }
-  resources :users, only: %i[index show destroy] do
+  resources :users, only: %i[index show edit update destroy] do
   	member do
   		patch :ban
   	end

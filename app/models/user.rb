@@ -1,5 +1,7 @@
 class User < ApplicationRecord
 
+  include Roleable
+
   attr_accessor :login
 
   # Include default devise modules. Others available are:
@@ -40,6 +42,15 @@ class User < ApplicationRecord
 
     user.confirmed_at = Time.now # Autoconfirm User form omniauth
     user
+  end
+
+  after_create do
+    # assigner un role par defaut à tout nouvel utilisateur
+    self.update(abonner: true)    
+  end
+
+  def to_s
+    email
   end
 
 end
