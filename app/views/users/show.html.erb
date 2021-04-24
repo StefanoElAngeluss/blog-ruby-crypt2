@@ -1,5 +1,75 @@
-<h1>Utilisateurs</h1>
-<%= render 'users/user', user: @user %>
-<p>
-	<%= link_to "Tous les Utilisateurs", users_path %>
-</p>
+<div class="card mb-4">
+	<div class="card-header d-flex justify-content-between">
+		<h1>Utilisateur</h1>
+		<span class="mt-3">
+			<%= link_to "Tous les Utilisateurs", users_path, class: 'btn btn-sm btn-dark' %>
+		</span>
+	</div>
+	<div class="card-body">
+		<b>Id:</b>
+			<span class="ml-2"><%= @user.id %></span>
+		<br>
+		<b>Nom D'utilisateur:</b>
+			<span class="ml-2"><%= @user.username %></span>
+		<br>
+		<b>Email:</b>
+			<span class="ml-2"><%= @user.email %></span>
+		<br>
+		<b>Confirmation:</b>
+			<span class="ml-2"><%= boolean_label(@user.confirmed?) %></span>
+		<br>
+
+		<b><%= 'sign_in_count:'.humanize %></b>
+		<%= @user.sign_in_count %>
+		<br>
+		<b><%= 'current_sign_in_at:'.humanize %></b>
+		<%= @user.current_sign_in_at %>
+		<br>
+		<b><%= 'last_sign_in_at:'.humanize %></b>
+		<%= @user.last_sign_in_at %>
+		<br>
+		<b><%= 'current_sign_in_ip:'.humanize %></b>
+		<%= @user.current_sign_in_ip %>
+		<br>
+		<b><%= 'last_sign_in_ip:'.humanize %></b>
+		<%= @user.last_sign_in_ip %>
+		<br>
+		<b><%= 'locked_at:'.humanize %></b>
+		<%= @user.locked_at %>
+
+		<br>
+		<b><%= 'provider:'.humanize %></b>
+		<%= @user.provider %>
+		<br>
+		<b><%= 'uid:'.humanize %></b>
+		<%= @user.uid %>
+		<br>
+		<b><%= 'name:'.humanize %></b>
+		<%= @user.name %>
+		<br>
+		<b><%= 'image:'.humanize %></b>
+		<% if @user.image.present? %>
+			<%= image_tag @user.image, size: "50x50" %>
+		<% end %>
+
+		<br>
+		<b><%= 'role_utilisateur:'.humanize %></b>
+		<% if @user.roles.present? %>
+			<%= @user.active_roles.join(", ") %>
+		<% end %>
+
+		<% if current_user.admin? %>
+			<div class="mt-2">
+				<p class="d-flex justify-content-between">
+					<%= link_to "Supprimer mon compte", @user, method: :delete, data: { confirm: "Êtes vous sure de vouloir supprimer votre compte ?" }, class: "btn btn-sm btn-outline-danger" %>
+					<%= link_to "Editer le role utilisateur", edit_user_path(@user), class: "btn btn-sm btn-outline-info" %>
+					<% if @user.access_locked? %>
+						<%= link_to ban_status(@user), ban_user_path(@user), method: :patch, data: { confirm: "Êtes vous sure de vouloir bannir cet utilisateur ?" }, class: "btn btn-sm btn-outline-secondary" %>
+					<% else %>
+						<%= link_to ban_status(@user), ban_user_path(@user), method: :patch, data: { confirm: "Êtes vous sure de vouloir bannir cet utilisateur ?" }, class: "btn btn-sm btn-outline-warning" %>
+					<% end %>
+				</p>
+			</div>
+		<% end %>
+	</div>
+</div>

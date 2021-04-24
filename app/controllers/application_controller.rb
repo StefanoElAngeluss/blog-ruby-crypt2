@@ -10,4 +10,8 @@ class ApplicationController < ActionController::Base
 		user_path(resource)
 	end
 
+	def to_boolean(str)
+	  return true if str=="Oui"
+	end
+
 end
