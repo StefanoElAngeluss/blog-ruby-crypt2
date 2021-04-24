@@ -6,9 +6,9 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
 	validates :username, presence: true, uniqueness: {case_sensitive: false}, format: {with: /\A[a-zA-Z0-9 _\.]*\z/}
 
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable,
-         :confirmable, :trackable, :lockable
+  devise :database_authenticatable, :registerable, :recoverable, 
+         :rememberable, :validatable, :confirmable, :trackable,
+         :lockable, :omniauthable, omniauth_providers: [:google_oauth2]
 
 
   	def self.find_first_by_auth_conditions(warden_conditions)
