@@ -14,7 +14,11 @@ gem 'bootsnap', '>= 1.4.4', require: false
 
 # GEMS PERSONNEL
 gem 'devise', github: 'heartcombo/devise'
-gem 'omniauth-google-oauth2'
+gem "omniauth", "~> 1.9.1"
+gem "omniauth-google-oauth2"
+gem 'omniauth-github'
+gem 'omniauth-twitter'
+gem 'omniauth-facebook'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
