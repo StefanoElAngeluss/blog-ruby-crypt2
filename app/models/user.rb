@@ -8,7 +8,7 @@ class User < ApplicationRecord
 
   devise :database_authenticatable, :registerable, :recoverable, 
          :rememberable, :validatable, :confirmable, :trackable,
-         :lockable, :omniauthable, omniauth_providers: [:google, :github, :twitter]
+         :lockable, :omniauthable, omniauth_providers: [:google, :github, :twitter, :facebook]
 
 
   # Ceci est pour utiliser l'email ou l'username pour le login voir devise.rb dans initializers
