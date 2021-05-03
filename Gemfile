@@ -20,15 +20,21 @@ gem 'omniauth-github'
 gem 'omniauth-twitter'
 gem 'omniauth-facebook'
 gem 'devise_invitable', '~> 2.0.0'
-
-group :development, :test do
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-end
+gem 'invisible_captcha'
 
 group :development do
   gem 'web-console', '>= 4.1.0'
   gem 'rack-mini-profiler', '~> 2.0'
 end
+
+group :production do
+	gem 'exception_notification'
+end
+
+group :development, :test do
+  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+end
+
 
 group :test do
   gem 'capybara', '>= 3.26'
