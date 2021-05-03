@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   resources :users, only: %i[index show edit update destroy] do
   	member do
   		patch :ban
+      patch :resend_confirmation_instructions
+      patch :resend_invitation
   	end
   end
 

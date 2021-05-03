@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
 
-	before_action :only_admin, only: [:edit, :update, :ban, :destroy]
+	before_action :require_admin, only: [:edit, :update, :ban, :destroy, :resend_confirmation_instructions]
+	before_action :require_admin_or_inviter, only: [:resend_invitation]
 
 	def index
 		@users = User.all.order(created_at: :asc)
@@ -30,6 +31,26 @@ class UsersController < ApplicationController
 		redirect_to users_path, notice: "Votre compte à été supprimer avec succès."
 	end
 
+	def resend_confirmation_instructions
+		@user = User.find(params[:id])
+		if @user.confirmed? == false && @user.created_by_invite? == false
+			@user.resend_confirmation_instructions
+			redirect_to @user, notice: "Les instructions de confirmation ont bien été renvoyées"
+		else
+			redirect_to @user, alert: "L'utilisateur à déjà confirmé"
+		end
+	end
+
+	def resend_invitation
+		@user = User.find(params[:id])
+		if @user.created_by_invite? && @user.invitation_accepted? == false && @user.confirmed? == false
+			@user.invite!
+			redirect_to @user, notice: "Les instructions d'invitation ont bien été renvoyées"
+		else
+			redirect_to @user, alert: "L'utilisateur à déjà confirmé"
+		end
+	end
+
 	def ban
 		@user = User.find(params[:id])
 		if @user.access_locked?
@@ -51,9 +72,16 @@ class UsersController < ApplicationController
     params.require(:user).permit(*User::ROLES)
   end
 
-  def only_admin
+  def require_admin
     unless current_user.admin?
-      redirect_to root_path, notice: "vous n'êtes pas autorisé à effectuer cette action!"
+      redirect_to root_path, alert: "vous n'êtes pas autorisé à effectuer cette action!"
+    end
+  end
+
+  def require_admin_or_inviter
+  	@user = User.find(params[:id])
+  	unless current_user.admin? || @user.invited_by == current_user
+      redirect_to root_path, alert: "vous n'êtes pas autorisé à effectuer cette action!"
     end
   end
 

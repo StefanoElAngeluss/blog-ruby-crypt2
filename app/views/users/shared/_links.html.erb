@@ -17,10 +17,17 @@
 <%- if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>
   <%= link_to "Vous n'avez pas reçu d'instructions de déverrouillage?", new_unlock_path(resource_name) %><br />
 <% end %>
-
-<%- if devise_mapping.omniauthable? %>
-  <%- resource_class.omniauth_providers.each do |provider| %>
-    <%#= link_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider) %><!--<br />-->
-    <%= link_to "Se connecter avec #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider) %><br />
-  <% end %>
+<br>
+<h4>Connection via les réseaux sociaux</h4>
+<%= link_to user_facebook_omniauth_authorize_path do %>
+  <div class="fab fa-facebook fa-3x" style="text-decoration:none;"></div>
+<% end %>
+<%= link_to user_github_omniauth_authorize_path do %>
+  <div class="fab fa-github fa-3x ml-2" style="text-decoration:none;color:#2c2c2c;"></div>
+<% end %>
+<%= link_to user_twitter_omniauth_authorize_path do %>
+  <div class="fab fa-twitter-square fa-3x ml-2" style="text-decoration:none;color:#7DCDEE;"></div>
+<% end %>
+<%= link_to user_google_omniauth_authorize_path do %>
+  <div class="fab fa-google fa-3x ml-2" style="text-decoration:none;color:#DC493A;"></div>
 <% end %>

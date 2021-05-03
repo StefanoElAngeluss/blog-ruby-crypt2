@@ -8,9 +8,10 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   # validates :username, presence: true, uniqueness: {case_sensitive: false}, format: {with: /\A[a-zA-Z0-9 _\.]*\z/}
 
-  devise :database_authenticatable, :registerable, :recoverable, 
-         :rememberable, :validatable, :confirmable, :trackable,
-         :lockable, :omniauthable, omniauth_providers: [:google, :github, :twitter, :facebook]
+  devise :invitable, :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable,
+         :confirmable, :trackable, :lockable, :invitable,
+         :omniauthable, omniauth_providers: [:google, :github, :twitter, :facebook]
 
 
   # Ceci est pour utiliser l'email ou l'username pour le login voir devise.rb dans initializers

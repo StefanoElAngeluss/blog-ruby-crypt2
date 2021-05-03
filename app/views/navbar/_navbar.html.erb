@@ -17,24 +17,28 @@
       <% if current_user %>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <div class="fa fa-user"></div>
+            <i class="fa fa-user"></i>
             <b><%= current_user.username %></b>
           </a>
           <div class="dropdown-menu" style="margin-left: -110px!important;margin-top: 7px!important;" aria-labelledby="navbarDropdown">
             <%= link_to users_path, class: "dropdown-item #{'active font-weight-bold' if current_page?(users_path)}" do %>
-              <div class="fa fa-users"></div>
+              <i class="fa fa-users"></i>
                 <span class="ml-2">Utilisateurs</span>
             <% end %>
+            <%= link_to new_user_invitation_path(current_user), class: "dropdown-item #{'active font-weight-bold' if current_page?(new_user_invitation_path(current_user))}" do %>
+              <i class="fas fa-paper-plane"></i>
+                <span class="ml-2">Invitation</span>
+            <% end %>
             <%= link_to user_path(current_user), class: "dropdown-item #{'active font-weight-bold' if current_page?(user_path(current_user))}" do %>
-              <div class="fa fa-user"></div>
+              <i class="fa fa-user"></i>
                 <span class="ml-2">Mon Profil</span>
             <% end %>
             <%= link_to edit_user_registration_path, class: "dropdown-item #{'active font-weight-bold' if current_page?(edit_user_registration_path)}" do %>
-              <div class="fa fa-cog"></div>
+              <i class="fa fa-cog"></i>
                 <span class="ml-2">Paramètre du Compte</span>
             <% end %>
             <%= link_to destroy_user_session_path, method: :delete, class: "dropdown-item" do %>
-              <div class="fa fa-sign-out-alt"></div>
+              <i class="fa fa-sign-out-alt"></i>
                 <span class="ml-2">Déconnexion</span>
             <% end %>
           </div>

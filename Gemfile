@@ -19,6 +19,7 @@ gem "omniauth-google-oauth2"
 gem 'omniauth-github'
 gem 'omniauth-twitter'
 gem 'omniauth-facebook'
+gem 'devise_invitable', '~> 2.0.0'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

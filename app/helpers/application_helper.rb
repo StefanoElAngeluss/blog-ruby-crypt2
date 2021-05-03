@@ -9,4 +9,5 @@ module ApplicationHelper
         content_tag(:span, value=("Non"), class: "badge badge-danger")
     end
   end
+
 end
