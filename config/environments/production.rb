@@ -4,7 +4,7 @@ Rails.application.configure do
 
   ## ENVOIE EMAIL ##
   # Rails.application.configure do
-  #   config.action_mailer.default_url_options = {host: "blog-ruby-crypt2.herokuapp.com", protocol: "https"}
+  #   config.action_mailer.default_url_options = {host: "superblog.herokuapp.com", protocol: "https"}
   #   config.action_mailer.perform_deliveries = true
   #   config.action_mailer.raise_delivery_errors = true
 
@@ -22,7 +22,7 @@ Rails.application.configure do
     email: {
       deliver_with: :deliver,
       email_prefix: '[PREFIX] ',
-      sender_address: %{"Application Error" <hello@blog.com>},
+      sender_address: %{"superblog Error" <hello@blog.com>},
       exception_recipients: %w{jesty2002@yahoo.fr}
     }
   # Settings specified here will take precedence over those in config/application.rb.

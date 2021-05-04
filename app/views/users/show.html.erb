@@ -1,9 +1,17 @@
-<div class="card mb-4">
+<div class="card shadow mb-4">
 	<div class="card-header d-flex justify-content-between">
 		<h1>Utilisateur</h1>
 		<span class="mt-3">
 			<%= link_to "Tous les Utilisateurs", users_path, class: 'btn btn-sm btn-dark' %>
 		</span>
+		<% if @user.invited_by == current_user %>
+			<% if @user.created_by_invite? && @user.invitatio_accepted? == false && @user.confirmed? == false %>
+				<%= link_to "renvoyer l'invitation", resend_invitation_user_path(user), method: :patch, class: 'btn btn-sm btn-outline-info' %>
+			<% end %>
+			<% if @useer.confirmed? == false && @user.created_by_invite? == false %>
+				<%= link_to "renvoyer les instructions de confirmation", resend_confirmation_instructions_user_path(user), method: :patch, class: 'btn btn-sm btn-outline-info' %>
+			<% end %>
+		<% end %>
 	</div>
 	<div class="card-body">
 		<b>Id:</b>

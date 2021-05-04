@@ -1,69 +1,59 @@
-<div align="center" class="mb-4">
+<div align="center" class="mb-4 mt-5">
 	<h2><%= pluralize @users.size, "Utilisateur" %></h2>
 </div>
 
-<div class="table-responsive">
-	<table class="table table-sm table-hover">
-		<thread>
-			<tr>
-				<th>Id</th>
-				<th>username</th>
-				<th>Email</th>
-				<th>Confirmation</th>
-				<th>Banni ?</th>
-				<th>Nom</th>
-				<th>Image</th>
-				<th>Roles</th>
-				<th>créer par invitation</th>
-				<th>invitation accépter</th>
-				<th>inviter par</th>
-				<th colspan="3">Actions</th>
-			</tr>
-		</thread>
+<table class="table table-sm table-hover table-bordered table-light shadow" style="position:relative;margin:auto;width: 90%;">
+	<thread>
+		<tr>
+			<th>Id</th>
+			<th>Email</th>
+			<th>username</th>
+			<th>Nom</th>
+			<th>Image</th>
+			<th>Roles</th>
+			<th>Confirmation</th>
+			<th>Banni ?</th>
+			<th>créer par invitation?</th>
+			<th>invitation accépter</th>
+			<th colspan="3">Actions</th>
+		</tr>
+	</thread>
 
-		<tbody>
-			<% @users.each do |user| %>
-				<tr>
-					<td><%= link_to user.id, user_path(user) %></td>
-					<td><%= link_to user.username, user_path(user), class: 'link_perso' %></td>
-					<td><%= user %></td>
-					<td><%= boolean_label(user.confirmed?) %></td>
-					<td><%= boolean_label(user.access_locked?) %></td>
-					<td><%= user.name %></td>
-					<td>
-						<% if user.image.present? %>
-							<%= image_tag user.image, size: "30x30" %>
+	<tbody>
+		<% @users.each do |user| %>
+			<tr>
+				<td><%= link_to user.id, user_path(user) %></td>
+				<td><%= user %></td>
+				<td><%= link_to user.username, user_path(user), class: 'link_perso' %></td>
+				<td><%= user.name %></td>
+				<td>
+					<% if user.image.present? %>
+						<%= image_tag user.image, size: "30x30" %>
+					<% end %>
+				</td>
+				<td><%= user.active_roles.join(", ") %></td>
+				<td><%= boolean_label(user.confirmed?) %></td>
+				<td><%= boolean_label(user.access_locked?) %></td>
+				<td><%= boolean_label(user.created_by_invite?) %></td>
+				<td><%= boolean_label(user.invitation_accepted?) %></td>
+				<td>
+					<% if user.invited_by == current_user %>
+						<% if user.created_by_invite? && user.invitation_accepted? == false && user.confirmed? == false %>
+							<%= link_to "renvoyer l'invitation", resend_invitation_user_path(user), method: :patch, class: 'btn btn-sm btn-outline-info' %>
 						<% end %>
-					</td>
-					<td><%= user.active_roles.join(", ") %></td>
-					<td><%= boolean_label(user.created_by_invite?) %></td>
-					<td><%= boolean_label(user.invitation_accepted?) %></td>
-					<td>
-						<% if user.invite! %>
-							<%= user.username %>
-						<% end %>
-					</td>
-					<td>
-						<% if current_user.admin? || user.invited_by == current_user %>
-							<% if user.created_by_invite? && user.invitation_accepted? == false && user.confirmed? == false %>
-								<%= link_to "renvoyer l'invitation", resend_invitation_user_path(user), method: :patch, class: 'btn btn-sm btn-outline-info' %>
-							<% end %>
-						<% end %>
-						<% if current_user.admin? %>
-							<% if user.confirmed? == false && user.created_by_invite? == false %>
-								<%= link_to "renvoyer les instructions de confirmation", resend_confirmation_instructions_user_path(user), method: :patch, class: 'btn btn-sm btn-outline-info' %>
-							<% end %>
-							<%= link_to "Editer le rôle", edit_user_path(user), class: "btn btn-sm btn-info" %>
-							<%= link_to "Supprimer", user, method: :delete, data: { confirm: "Êtes vous sure de vouloir supprimer votre compte ?" }, class: "btn btn-sm btn-danger" %>
-							<% if user.access_locked? %>
-								<%= link_to ban_status(user), ban_user_path(user), method: :patch, data: { confirm: "Êtes vous sure de vouloir bannir cet utilisateur ?" }, class: "btn btn-sm btn-secondary" %>
-							<% else %>
-								<%= link_to ban_status(user), ban_user_path(user), method: :patch, data: { confirm: "Êtes vous sure de vouloir bannir cet utilisateur ?" }, class: "btn btn-sm btn-warning" %>
-							<% end %>
-						<% end %>
-					</td>
-				</tr>
-			<% end %>
-		</tbody>
-	</table>
-</div>
+					<% end %>
+					<% if user.confirmed? == false && user.created_by_invite? == false %>
+						<%= link_to "renvoyer les instructions de confirmation", resend_confirmation_instructions_user_path(user), method: :patch, class: 'btn btn-sm btn-outline-info' %>
+					<% end %>
+					<%= link_to "Editer", edit_user_path(user), class: "btn btn-sm btn-info" %>
+					<%= link_to "Supprimer", user, method: :delete, data: { confirm: "Êtes vous sure de vouloir supprimer votre compte ?" }, class: "btn btn-sm btn-danger" %>
+					<% if user.access_locked? %>
+						<%= link_to ban_status(user), ban_user_path(user), method: :patch, data: { confirm: "Êtes vous sure de vouloir bannir cet utilisateur ?" }, class: "btn btn-sm btn-secondary" %>
+					<% else %>
+						<%= link_to ban_status(user), ban_user_path(user), method: :patch, data: { confirm: "Êtes vous sure de vouloir bannir cet utilisateur ?" }, class: "btn btn-sm btn-warning" %>
+					<% end %>
+				</td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
