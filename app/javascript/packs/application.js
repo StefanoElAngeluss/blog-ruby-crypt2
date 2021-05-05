@@ -18,3 +18,6 @@ require("stylesheets/application.scss")
 
 global.toastr = require("toastr")
 
+
+require("trix")
+require("@rails/actiontext")

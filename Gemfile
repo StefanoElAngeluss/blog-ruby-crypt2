@@ -21,6 +21,9 @@ gem 'omniauth-twitter'
 gem 'omniauth-facebook'
 gem 'devise_invitable', '~> 2.0.0'
 gem 'invisible_captcha'
+gem 'carrierwave', '~> 2.2', '>= 2.2.1'
+gem 'mini_magick', '~> 4.11'
+gem 'annotate'
 
 group :development do
   gem 'web-console', '>= 4.1.0'

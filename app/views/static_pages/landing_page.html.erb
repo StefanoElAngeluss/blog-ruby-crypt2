@@ -1,33 +1,40 @@
-<h1 class="mt-4" align="center">Bienvenue sur notre site</h1>
-<div class="container mb-5 mt-5">
-	
-	<div class="card" style="width: 18rem;">
-		<div class="card-header p-0 mx-3 mt-3 position-relative z-index-1">
-			<a href="#" class="d-block">
-				<img src="https://loremflickr.com/320/240" class="img-fluid border-radius-lg" style="width:100%;">
-			</a>
-		</div>
+<h1 class="mt-5" align="center">Bienvenue sur notre site</h1>
+<div class="container mt-5 mb-5">
+  <% @posts.each do |post| %>
+  <div class="card" style="width: 18rem;">
+    <div class="card-header p-0 mx-3 mt-3 position-relative z-index-1">
+      <% if post.image_url.present? %>
+        <img class="card-img-top"
+            style="width: 100%;height: 240px;"
+            src="<%= post.image_url(:post_show) %>"
+            alt="Blog image Card">
+      <% end %>
+    </div>
 
-		<div class="card-body pt-2">
-			<span class="text-gradient text-primary text-uppercase text-xs font-weight-bold my-2">House</span>
-			<a href="" class="card-title h5 d-block link_perso">
-				Shared Coworking
-			</a>
-			<p class="card-description mb-4">
-				Use border utilities to quickly style the border and border-radius of an element. Great for images, buttons.
-			</p>
-			<div class="author align-items-center">
-				<img src="https://i.pravatar.cc/50?img=3" alt="..." class="avatar shadow" style="border-radius: 50%;">
-					<span class="ml-2">Mathew Glock</span>
-					<div class="d-flex justify-content-between mt-3">
-						<hr style="border:2px solid green;width:40%;float:left;">
-							<i class="fas fa-anchor" style="margin-top:8px!important;"></i>
-						<hr style="border:2px solid green;width:40%;float:right;">
-					</div>
-					<div class="stats mt-2">
-						<small>Posted on 28 February</small>
-					</div>
-			</div>
-		</div>
-	</div>
+    <div class="card-body pt-2">
+      <span class="text-gradient text-primary text-uppercase text-xs font-weight-bold my-2">House</span>
+      <p href="" class="card-title h5 d-block link_perso">
+        
+        <%= link_to post.title, post_path(post) %>
+      </p>
+        <p class="card-description mb-4">
+          <%= truncate(post.content, length: 50) %>
+        </p>
+        <div class="author align-items-center">
+        <img src="https://i.pravatar.cc/50?img=3" alt="..." class="avatar shadow" style="border-radius: 50%;">
+          <span class="ml-2"><%= post.user.username %></span>
+          <div class="d-flex justify-content-between mt-3">
+            <hr style="border:2px solid green;width:40%;float:left;">
+              <i class="fas fa-anchor" style="margin-top:8px!important;"></i>
+            <hr style="border:2px solid green;width:40%;float:right;">
+          </div>
+          <div class="stats mt-2">
+            <small>
+              <%= l(post.created_at.to_date,format: :long) %> | <%= pluralize(post.views, "Vues") %>
+            </small>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>

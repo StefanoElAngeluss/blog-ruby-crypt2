@@ -1,0 +1,55 @@
+<p id="notice"><%= notice %></p>
+<% if user_signed_in? %>
+<div class="container mt-5 mb-5">
+  <div class="d-flex justify-content-around">
+    <h1>Tous les Articles</h1>
+    <span style="margin-top: 14px; margin-bottom: 50px;">
+      <%= link_to 'New Post', new_post_path, class: 'btn btn-sm btn-dark' %>
+    </span>
+  </div>
+  <% @posts.each do |post| %>
+    <div class="card" style="width: 18rem;">
+    <div class="card-header p-0 mx-3 mt-3 position-relative z-index-1">
+      <% if post.image_url.present? %>
+        <img class="card-img-top"
+            style="width: 100%;height: 240px;"
+            src="<%= post.image_url(:post_show) %>"
+            alt="Blog image Card">
+      <% end %>
+    </div>
+
+    <div class="card-body pt-2">
+      <span class="text-gradient text-primary text-uppercase text-xs font-weight-bold my-2">House</span>
+      <p href="" class="card-title h5 d-block link_perso"> 
+        <%= link_to post.title, post_path(post) %>
+      </p>
+        <p class="card-description mb-4">
+          <%= truncate(post.content, length: 50) %>
+        </p>
+        <div class="author align-items-center">
+          <img src="https://i.pravatar.cc/50?img=3" alt="..." class="avatar shadow" style="border-radius: 50%;">
+            <span class="ml-2"><%= post.user.username %></span>
+            <div class="d-flex justify-content-between mt-3">
+              <hr style="border:2px solid green;width:40%;float:left;">
+                <i class="fas fa-anchor" style="margin-top:8px!important;"></i>
+              <hr style="border:2px solid green;width:40%;float:right;">
+            </div>
+            <div class="stats mt-2">
+              <small><%= l(post.created_at.to_date,format: :long) %> | <%= pluralize(post.views, "Vues") %></small>
+            </div>
+        </div>
+      </div>
+      <% if current_user.admin? %>
+        <div class="card-footer">
+            <% if post.published? %>
+              <%= link_to "Ne pas publier", unpublish_post_path(post), method: :put, class: 'btn btn-sm btn-secondary' %>
+            <% else %>
+              <%= link_to "Publier", publish_post_path(post), method: :put, class: 'btn btn-sm btn-success' %>
+              <%= %>
+            <% end %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+<% end %>

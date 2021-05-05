@@ -1,0 +1,42 @@
+<%= form_with(model: post, html: { multipart: true }) do |form| %>
+  <% if post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+        <% post.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title, class: 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :content %>
+    <%= form.text_area :content, class: 'form-control' %>
+  </div>
+
+  <div class="field">
+    <label>Mon Image</label>
+    <% if image_tag @post.image_url(:thumbnail) %>
+      <%= image_tag(@post.image_url) if @post.image? %>
+      <%= form.file_field :image, class: 'form-control' %>
+      <%= form.hidden_field :image_cache %>
+    <% end %>
+    <label>
+      <%= form.check_box :remove_image %>
+      Remove image
+    </label>
+  </div>
+
+  <div class="actions">
+    <div class="field">
+    <%= form.submit "Envoyer", class: 'btn btn-success' %>
+  </div>
+  </div>
+<% end %>

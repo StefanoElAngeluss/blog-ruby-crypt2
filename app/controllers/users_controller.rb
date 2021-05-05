@@ -6,6 +6,9 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all.order(created_at: :asc)
+    unless current_user.admin?
+      redirect_to (request.referrer || root_path), alert: "vous n'êtes pas autorisé à effectuer cette action!"
+    end
   end
 
   def show

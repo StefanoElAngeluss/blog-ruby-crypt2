@@ -9,8 +9,16 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <%= link_to root_path, class: "nav-link #{'active font-weight-bold' if current_page?(root_path)}" do %>
-        <div class="fa fa-home"></div>
+        <i class="fa fa-home"></i>
         Accueil
+      <% end %>
+      <% if user_signed_in? && current_user.admin? %>
+        <%= link_to posts_path, class: "nav-link #{'active font-weight-bold' if current_page?(posts_path)}" do %>
+          <i class="fas fa-newspaper"></i>
+          Articles
+        <% end %>
+      <% else %>
+        
       <% end %>
     </ul>
     <ul class="navbar-nav mr-right">
