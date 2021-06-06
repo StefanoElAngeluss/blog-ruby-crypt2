@@ -30,7 +30,11 @@
           </div>
           <div class="stats mt-2">
             <small>
-              <%= l(post.created_at.to_date,format: :long) %> | <%= pluralize(post.views, "Vues") %>
+              <b>
+                Publier le :
+              </b>
+              <%= l(post.created_at.to_date,format: :long) %> | 
+              <%= pluralize(post.views, "Vues") %>
             </small>
           </div>
         </div>

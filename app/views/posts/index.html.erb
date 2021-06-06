@@ -35,7 +35,13 @@
               <hr style="border:2px solid green;width:40%;float:right;">
             </div>
             <div class="stats mt-2">
-              <small><%= l(post.created_at.to_date,format: :long) %> | <%= pluralize(post.views, "Vues") %></small>
+              <small>
+                <b>
+                  Publier le :
+                </b>
+                <%= l(post.created_at.to_date,format: :long) %> | 
+                <%= pluralize(post.views, "Vues") %>
+              </small>
             </div>
         </div>
       </div>

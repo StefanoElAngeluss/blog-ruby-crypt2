@@ -23,10 +23,6 @@ class Post < ApplicationRecord
   scope :post_recent, -> { order(published_at: :desc) }
   scope :published, -> { where(published: true) }
 
-  def display_day_published
-  	"Publier le #{published_at.strftime('%-b %-d, %-Y')}"
-  end
-
   def publish
   	update(published: true, published_at: Time.now)
   end
